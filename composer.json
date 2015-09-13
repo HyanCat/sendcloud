@@ -1,0 +1,14 @@
+{
+    "name": "hyancat/sendcloud",
+    "description": "Sendcloud for Laravel 5.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HyanCat",
+            "email": "hyancat@live.cn"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
