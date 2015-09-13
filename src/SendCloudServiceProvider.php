@@ -8,10 +8,17 @@ class SendCloudServiceProvider extends ServiceProvider
 {
 	protected $defer = true;
 
+	public function boot()
+	{
+		$this->publishes([
+			__DIR__ . '/../config/sendcloud.php' => config_path('sendcloud.php'),
+		]);
+	}
+
 	public function register()
 	{
 		$this->app->singleton('sendcloud', function ($app) {
-			return new SendCloudPusher();
+			return $app->make('Hyancat\Sendcloud\SendCloudPusher');
 		});
 	}
 

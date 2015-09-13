@@ -48,11 +48,11 @@ class SendCloudPusher
 			'subject'  => $message->subject(),
 			'html'     => $message->body(),
 		];
-		dd($param);
 
 		$curl     = new Curl;
 		$response = $curl->post(self::API_MAIL_SEND, $param);
-		dd($response);
+
+		return $response;
 	}
 
 	private function buildMessage(SendCloudMessage $message, $body)
