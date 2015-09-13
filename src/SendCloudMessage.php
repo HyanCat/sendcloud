@@ -20,13 +20,11 @@ class SendCloudMessage
 		return array_key_exists('name', $this->from) ? $this->from['name'] : null;
 	}
 
-	public function template($template)
-	{
-	}
-
 	public function from($addr, $name)
 	{
 		$this->from = ['addr' => $addr, 'name' => $name];
+
+		return $this;
 	}
 
 	public function body($body = null)
