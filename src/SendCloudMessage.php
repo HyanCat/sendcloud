@@ -9,6 +9,7 @@ class SendCloudMessage
 	protected $subject;
 	protected $body;
 	protected $to = [];
+	protected $maillist = [];
 
 	public function getAddr()
 	{
@@ -43,6 +44,16 @@ class SendCloudMessage
 			return $this->to;
 		}
 		$this->to = $to;
+
+		return $this;
+	}
+
+	public function maillist(array $maillist = null)
+	{
+		if (is_null($maillist)) {
+			return $this->maillist;
+		}
+		$this->maillist = $maillist;
 
 		return $this;
 	}

@@ -17,8 +17,9 @@ class SendCloudServiceProvider extends ServiceProvider
 
 	public function register()
 	{
+		$this->app->bind('Hyancat\Sendcloud\SendCloudInterface', 'Hyancat\Sendcloud\SendCloudPusher');
 		$this->app->singleton('sendcloud', function ($app) {
-			return $app->make('Hyancat\Sendcloud\SendCloudPusher');
+			return $app->make('Hyancat\Sendcloud\SendCloudInterface');
 		});
 	}
 
