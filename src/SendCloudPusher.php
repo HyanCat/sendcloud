@@ -131,7 +131,6 @@ class SendCloudPusher implements SendCloudInterface
 		// 如果请求失败
 		if ($curl->error) {
 			$this->makeError($curl->errorCode, $curl->errorMessage);
-			dd($curl);
 
 			return;
 		}
