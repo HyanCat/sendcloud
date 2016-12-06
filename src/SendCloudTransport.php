@@ -33,6 +33,7 @@ class SendCloudTransport extends Transport
         $response = $this->sendCloud->send($message);
         $this->sendPerformed($message);
 
+        $response = json_decode($response, true);
         if ($response['statusCode'] === 200 && $response['result'] === true) {
             return $this->numberOfRecipients($message);
         } else {
