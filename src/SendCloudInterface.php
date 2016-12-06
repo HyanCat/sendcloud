@@ -1,39 +1,37 @@
 <?php
+/**
+ * This file is part of naptime-server.
+ *
+ * Created by HyanCat.
+ *
+ * Copyright (C) HyanCat. All rights reserved.
+ */
+namespace HyanCat\SendCloud;
 
-namespace Hyancat\Sendcloud;
+use Swift_Mime_Message;
 
-
+/**
+ * Given a basic interface for SendCloud api.
+ * Interface SendCloudInterface
+ * @namespace HyanCat\SendCloud
+ */
 interface SendCloudInterface
 {
-	/**
-	 * Send email with blade view.
-	 * @param  string  $view     The blade view name.
-	 * @param array    $data     The data for view.
-	 * @param \Closure $callback a closure to make a SendCloudMessage.
-	 * @return self
-	 */
-	public function send($view, array $data, \Closure $callback);
+    const API_MAIL_SEND = 'http://api.sendcloud.net/apiv2/mail/send';
+    const API_MAIL_SEND_TEMPLATE = 'http://api.sendcloud.net/apiv2/mail/sendtemplate';
 
-	/**
-	 * Send email with blade view.
-	 * @param string   $template The sendcloud template name.
-	 * @param array    $data     The data for template.
-	 * @param \Closure $callback a closure to make a SendCloudMessage.
-	 * @return self
-	 */
-	public function sendTemplate($template, array $data, \Closure $callback);
+    /**
+     * Send an email with a swift message.
+     * @param Swift_Mime_Message $message
+     * @return string  The response message from SendCloud.
+     */
+    public function send(Swift_Mime_Message $message);
 
-	/**
-	 * Callback of Success.
-	 * @param \Closure $callback
-	 * @return self
-	 */
-	public function success(\Closure $callback);
-
-	/**
-	 * Callback of Success.
-	 * @param \Closure $callback
-	 * @return self
-	 */
-	public function failure(\Closure $callback);
+    /**
+     * Send an email through SendCloud template.
+     * @param string $template
+     * @param array  $data
+     * @return string The response message from SendCloud.
+     */
+    public function sendTemplate(string $template, array $data = []);
 }

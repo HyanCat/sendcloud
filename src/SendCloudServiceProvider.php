@@ -1,33 +1,47 @@
 <?php
+/**
+ * This file is part of HyanCat/SendCloud.
+ *
+ * Created by HyanCat.
+ *
+ * Copyright (C) HyanCat. All rights reserved.
+ */
+namespace HyanCat\SendCloud;
 
-namespace Hyancat\Sendcloud;
-
+use Illuminate\Mail\TransportManager;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * A service provider that make a extend driver named "sendcloud" for sending email.
+ * Class SendCloudServiceProvider
+ * @namespace HyanCat\SendCloud
+ */
 class SendCloudServiceProvider extends ServiceProvider
 {
-	protected $defer = true;
+    protected $defer = true;
 
-	public function boot()
-	{
-		$this->publishes([
-			__DIR__ . '/../config/sendcloud.php' => config_path('sendcloud.php'),
-		]);
-	}
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/sendcloud.php' => config_path('sendcloud.php'),
+        ]);
+    }
 
-	public function register()
-	{
-		$this->app->bind('Hyancat\Sendcloud\SendCloudInterface', 'Hyancat\Sendcloud\SendCloudPusher');
-		$this->app->bind('Hyancat\Sendcloud\SendCloudApiInterface', 'Hyancat\Sendcloud\SendCloudApi');
-		$this->app->singleton('sendcloud', function ($app) {
-			return $app->make('Hyancat\Sendcloud\SendCloudInterface');
-		});
-	}
+    public function register()
+    {
+        // bind interface.
+        $this->app->bind(SendCloudInterface::class, SendCloudMailer::class);
 
-	public function provides()
-	{
-		return ['sendcloud'];
-	}
+        $this->registerTransport();
+    }
 
-
+    protected function registerTransport()
+    {
+        // extend transport.
+        $this->app->resolving('swift.transport', function (TransportManager $transportManager) {
+            $transportManager->extend('sendcloud', function ($app) {
+                return new SendCloudTransport($app[SendCloudInterface::class]);
+            });
+        });
+    }
 }

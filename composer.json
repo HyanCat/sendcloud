@@ -1,23 +1,27 @@
 {
-	"name": "hyancat/sendcloud",
-	"description": "Sendcloud for Laravel 5.",
-	"type": "library",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "HyanCat",
-			"email": "hyancat@live.cn"
-		}
-	],
-	"require": {
-		"php": ">=5.4.0",
-		"illuminate/support": "~5.0",
-		"php-curl-class/php-curl-class": "^4.6"
-	},
-	"autoload": {
-		"psr-4": {
-			"Hyancat\\Sendcloud\\": "src/"
-		}
-	},
-	"minimum-stability": "stable"
+    "name": "hyancat/sendcloud",
+    "description": "SendCloud for Laravel 5.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "HyanCat",
+            "email": "hyancat@live.cn"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "illuminate/support": "^5.3",
+        "illuminate/mail": "^5.3",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "HyanCat\\SendCloud\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
 }
